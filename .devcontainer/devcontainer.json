@@ -1,0 +1,20 @@
+{
+  "name": "{{param `github.owner`}}/{{param `github.repo`}}",
+  "dockerFile": "Dockerfile",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "ms-python.isort",
+        "ms-python.mypy-type-checker",
+        "ms-python.vscode-pylance",
+        "ms-python.pylint",
+        "donjayamanne.python-environment-manager"
+      ]
+    }
+  },
+  "postCreateCommand": "npm install"
+}

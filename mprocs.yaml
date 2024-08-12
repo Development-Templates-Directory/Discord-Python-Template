@@ -1,0 +1,5 @@
+procs:
+  package:
+    shell: poetry -q run start_watch
+  tests:
+    shell: poetry -q run test_watch

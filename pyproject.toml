@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "package"
+version = "0.1.0"
+description = "{{param `description`}}"
+authors = ["{{param `git.name`}} <{{param `git.email`}}>"]
+readme = "README.md"
+license = "MIT"
+# repository = "git+https://github.com/{{param `github.owner`}}/{{param `github.repo`}}.git"
+# homepage = "https://github.com/{{param `github.owner`}}/{{param `github.repo`}}#readme"
+packages = [
+    { include = "package" },
+    { include = "tests" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pymon = { git = "https://github.com/abderraouf-belalia/py-mon.git", branch = "exec" }
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+flake8 = "^7.1.1"
+isort = "^5.13.2"
+mypy = "^1.11.1"
+pylint = "^3.2.6"
+
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.3.2"
+faker = "^26.3.0"
+pytest-cov = "^5.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+omit = ["*/__init__.py"]
+
+[tool.poetry.scripts]
+
+# Execution flows
+start = "package.__init__:start"
+start_watch = "package.__init__:start_watch"
+
+# Development flows
+dev = "package.__init__:dev"
+
+# Test flows
+test = "tests.__init__:test"
+test_watch = "tests.__init__:test_watch"
+coverage = "tests.__init__:coverage"
