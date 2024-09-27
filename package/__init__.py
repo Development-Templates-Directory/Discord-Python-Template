@@ -1,15 +1,27 @@
 """ Entry points.
 """
 
-from os import system
+from os import system, getenv
 from pymon import main, Arguments as MonitorArguments
 from .components import greet
+from .__core__ import Core
+from .__decorators__ import run_script, load_env
+from .utils.logger import logger
 
 
+@load_env()
+@run_script("./.scripts/setup_log.sh")
+@run_script("./.scripts/env_sync.sh")
 def start() -> None:
     """start Launches the program."""
     greeting: str = greet()
     print(greeting)
+
+    token = getenv("DISCORD_BOT_TOKEN")
+    if token is not None:
+        Core().run(token=token)
+    else:
+        logger.error("Provide a valid DISCORD_BOT_TOKEN in .env file.")
 
 
 def start_watch() -> None:
